@@ -33,9 +33,9 @@ def UserReg():
     while check != True:
         Username = input("User registration:\nInput your user name:")
         if usernameChecker(Username, userDict) == 1:
-            print("user exists")
+            break
         else:
-            print("enter password")
+            print("The user exists. Please choose another user name.")
 
     while check != True:
         Password = input(
@@ -59,7 +59,14 @@ def UserLogin():
     if usernameChecker(Username, userDict) == 1:
         print("User Does not exist")
         return 0
-    print("check")
+    check = False
+    while check != True:
+        password = input("Input password:")
+        if password != userDict[Username]:
+            print("Wrong password, input again")
+        else:
+            print("Welcome back, {}, You can start the game.".format(Username))
+            return 0
 
 
 def main():
