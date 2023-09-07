@@ -1,3 +1,10 @@
+#global dictionary of existing users
+userDict = {
+    'Test': 'Test12345',
+    'Jack': 'Test12345',
+    'Tom': 'Password1',
+}
+
 
 def usernameChecker(Username, userList):
     if Username in list(userList):
@@ -24,11 +31,7 @@ def passwordchecker(Password):
 
 
 def UserReg():
-    userDict = {
-        'Test': 'Test12345',
-        'Jack': 'Test12345',
-        'Tom': 'Password1',
-    }
+
     check = False
     while check != True:
         Username = input("User registration:\nInput your user name:")
@@ -50,11 +53,6 @@ def UserReg():
 
 
 def UserLogin():
-    userDict = {
-        'Test': 'Test12345',
-        'Jack': 'Test12345',
-        'Tom': 'Password1',
-    }
     Username = input("Input your user name:")
     if usernameChecker(Username, userDict) == 1:
         print("User Does not exist")
@@ -77,7 +75,6 @@ def main():
                 "Please select one of the following options:\n1. User registration\n2. User Login\n"))
         except ValueError:
             print("Please enter a valid value")
-
     if choice == 1:
         UserReg()
     else:

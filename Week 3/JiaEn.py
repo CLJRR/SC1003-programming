@@ -1,14 +1,8 @@
-existing_user = {'Test': "Test12345", 'Jack': "Test12345", 'Tom': 'Password1'}
-
-check = False
-while check != True:
-    # ask for username
-    user = input("User registration:\nInput your user name:")
-    # check if username is duped
-    if user in list(existing_user):
-        print("The user exists. Please choose another user name.")
-    else:
-        break
+existing_user = {
+    'Test': "Test12345",
+    'Jack': "Test12345",
+    'Tom': 'Password1'
+}
 
 
 def is_strong_password(password):
@@ -32,7 +26,16 @@ def is_strong_password(password):
     return False
 
 
-while True:
+check = False
+while check != True:
+    # ask for username
+    user = input("User registration:\nInput your user name:")
+    # check if username is duped
+    if user in list(existing_user):
+        print("The user exists. Please choose another user name.")
+    else:
+        break
+while check != True:
     password = input('''Input your password:
 1. the password has at least one upper case letter
 2. the password has at least one lower case letter
