@@ -1,4 +1,4 @@
-#global dictionary of existing users
+# global dictionary of existing users
 userDict = {
     'Test': 'Test12345',
     'Jack': 'Test12345',
