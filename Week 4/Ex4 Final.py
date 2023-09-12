@@ -191,6 +191,10 @@ def calcGame():
 def main():
     choice = getuserchoice()
     if choice == 1:
+        # so this calles the 2 other functions, if u move to the UserReg function on top, it saves it as name and password respectively
+        # therefore:
+        #  Name = NewUsername()
+        #  Password = NewPassword()
         UserReg(NewUsername(), NewPassword())
     elif choice == 2:
         UserLogin()
