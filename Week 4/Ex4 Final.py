@@ -9,7 +9,7 @@ userDict = {
 
 def getuserchoice():
     choice = 0
-    while choice <= 0 or choice >= 4:
+    while choice <= 0 or choice >= 5:
         try:
             choice = int(input(
                 "Please select one of the following options:\n1. User registration\n2. User Login\n3. Play the game as a guest\n"))
@@ -189,17 +189,20 @@ def calcGame():
 
 
 def main():
-    choice = getuserchoice()
-    if choice == 1:
-        # so this calles the 2 other functions, if u move to the UserReg function on top, it saves it as name and password respectively
-        # therefore:
-        #  Name = NewUsername()
-        #  Password = NewPassword()
-        UserReg(NewUsername(), NewPassword())
-    elif choice == 2:
-        UserLogin()
-    else:
-        Quizzes()
+    while True:
+        choice = getuserchoice()
+        if choice == 1:
+            # so this calles the 2 other functions, if u move to the UserReg function on top, it saves it as name and password respectively
+            # therefore:
+            #  Name = NewUsername()
+            #  Password = NewPassword()
+            UserReg(NewUsername(), NewPassword())
+        elif choice == 2:
+            UserLogin()
+        elif choice == 3:
+            Quizzes()
+        else:
+            return 0
 
 
 main()
