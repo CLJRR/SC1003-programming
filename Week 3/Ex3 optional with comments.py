@@ -20,6 +20,8 @@ def usernameChecker(Username, userList):
 # ask for the User's Input to be shared through variable "Password"
 # returns 1 if password does not meet requirement
 # returns 0 if password meets requirements
+
+
 def passwordchecker(Password):
     # set variables to false/0
     special = upper = lower = digit = int(0)
