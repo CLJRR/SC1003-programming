@@ -8,7 +8,7 @@ userDict = {
 
 # function to check if username is in existing users
 # return 1 if username is taken
-# retuen 0 if username is free
+# return 0 if username is free
 def usernameChecker(Username, userList):
     if Username in list(userList):
         return 1
@@ -65,8 +65,8 @@ def main():
             break
         else:
             print("Your password is weak. Please enter a new password")
-    # At this pt, username and password are both valid
 
+    # At this pt, username and password are both valid
     # add username and password to dictionary
     userDict[Username] = Password
     # print all existing users in dictionary
