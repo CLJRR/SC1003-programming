@@ -24,11 +24,5 @@ int numDigits1(int num)
 }
 void numDigits2(int num, int *result)
 {
-    int count = 0;
-    while (num != 0)
-    {
-        count++;
-        num /= 10;
-    }
-    *result = count;
+    *result = numDigits1(num);
 }

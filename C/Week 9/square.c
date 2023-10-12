@@ -23,11 +23,5 @@ int square1(int num)
 }
 void square2(int num, int *result)
 {
-    int out = 0, adder = 1;
-    for (int i = 1; i <= num; i++)
-    {
-        out += adder;
-        adder += 2;
-    }
-    *result = out;
+    *result = square1(num);
 }

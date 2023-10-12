@@ -24,10 +24,6 @@ int digitPos1(int num, int digit)
 }
 void digitPos2(int num, int digit, int *result)
 {
-    for (int i = 1; i <= digit - 1; i++)
-    {
-        num /= 10;
-    }
-    num %= 10;
-    *result = num;
+
+    *result = digitPos1(num, digit);
 }
