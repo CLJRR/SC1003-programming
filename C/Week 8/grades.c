@@ -4,37 +4,34 @@
 #include <ctype.h>
 int main()
 {
-    int studentNumber = 0;
-    int mark;
-    printf("please enter student number: ");
-    scanf("%d", &studentNumber);
-
-    while (studentNumber != -1)
+    int id, marks;
+    printf("Enter Student ID:  \n");
+    scanf("%d", &id);
+    while (id != -1)
     {
-        printf("Enter mark: ");
-        scanf("%d", &mark);
-        if (mark >= 75)
+        printf("Enter Mark:\n");
+        scanf("%d", &marks);
+        if (marks >= 75)
         {
-            printf("grade A\n");
+            printf("Grade = A\n");
         }
-        else if (mark >= 65)
+        else if (marks >= 65)
         {
-            printf("grade B\n");
+            printf("Grade = B\n");
         }
-        else if (mark >= 55)
+        else if (marks >= 55)
         {
-            printf("grade C\n");
+            printf("Grade = C\n");
         }
-        else if (mark >= 45)
+        else if (marks >= 45)
         {
-            printf("grade D\n");
+            printf("Grade = D\n");
         }
         else
         {
-            printf("grade F\n");
+            printf("Grade = F\n");
         }
-        printf("please enter student number: ");
-        scanf("%d", &studentNumber);
+        printf("Enter Student ID:  \n");
+        scanf("%d", &id);
     }
-    return 0;
 }
