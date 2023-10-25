@@ -1,5 +1,6 @@
 #include <stdio.h>
 void reverseAr1D(int ar[], int size);
+
 int main()
 {
     int ar[10];
@@ -23,15 +24,9 @@ int main()
 }
 void reverseAr1D(int ar[], int size)
 {
-    int *p = &ar[0];
     int outArray[size];
     for (int i = 0, j = size - 1; i < size; i++, j--)
         outArray[i] = ar[j];
     for (int i = 0; i < size; i++)
-        *p = outArray[i];
-    // outArray[0] = ar[j];
-    // for (int i = 0, j = size; i < size; i++, j--)
-    //     printf("%d\n", outArray[i]);
-
-    ar[size] = outArray[size];
+        ar[i] = outArray[i];
 }
