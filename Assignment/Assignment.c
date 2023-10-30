@@ -97,13 +97,12 @@ int addBook(int *bookNum)
     int input;
     printf("addBook():\nEnter bookID:\n");
     scanf("%d", &bookshop[*bookNum].bookID);
-    printf("Enter book title:\n1");
+    printf("Enter book title:\n");
     fgets(s, 40, stdin);
     if (fgets(s, 40, stdin))
     {
         s[strcspn(s, "\n")] = 0;
     }
-    // fgets(s, 40, stdin);
     strcpy(bookshop[*bookNum].title, s);
     printf("Enter author name:\n");
     if (fgets(s, 40, stdin))
