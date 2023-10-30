@@ -93,37 +93,41 @@ int bookIdChecker(int bookNum)
 }
 int addBook(int *bookNum)
 {
-    printf("addBook():\n");
-    char s[40];
-    printf("Enter bookID:\n");
-    scanf("%d", &bookshop[*bookNum].bookID);
-    printf("Enter book title:\n");
-    scanf("%s", &s);
-    strcpy(bookshop[*bookNum].title, s);
-    printf("Enter author name:\n");
-    scanf("%s", &s);
-    strcpy(bookshop[*bookNum].author, s);
-    printf("Enter price:\n");
-    scanf("%lf", &bookshop[*bookNum].price);
-    printf("Enter quantity:\n");
-    scanf("%d", &bookshop[*bookNum].quantity);
-    if (*bookNum == 5)
-        printf("The bookshop is full! Unable to addBook()\n");
-    else if (bookIdChecker(*bookNum) == 1)
-        printf("The bookID has already existed! Unable to addBook()\n");
-    else
+    char *a = "test";
+    for (int i = 5, j = 0; j < 5; i--, j++)
     {
-        printf("The book has been added successfully\n");
+        bookshop[j].bookID = i;
+        strcpy(bookshop[j].title, a);
+        strcpy(bookshop[j].author, a);
+        bookshop[j].price = i;
+        bookshop[j].quantity = i;
         *bookNum += 1;
-        printf("%d", *bookNum);
-        Rearrange(*bookNum);
     }
-    // bookshop[bookNum].bookID = bookNum + 1;
-    // char *a = "test";
-    // strcpy(bookshop[bookNum].title, a);
-    // strcpy(bookshop[bookNum].author, a);
-    // bookshop[bookNum].price = bookNum + 2;
-    // bookshop[bookNum].quantity = bookNum + 3;
+
+    bookshop[2].bookID = 99;
+    strcpy(bookshop[2].title, a);
+    strcpy(bookshop[2].author, a);
+    bookshop[2].price = 1;
+    bookshop[2].quantity = 1;
+
+    Rearrange(*bookNum);
+    // bookshop[0].bookID = 1;
+    // strcpy(bookshop[0].title, a);
+    // strcpy(bookshop[0].author, a);
+    // bookshop[0].price = 1;
+    // bookshop[0].quantity = 1;
+
+    // bookshop[0].bookID = 1;
+    // strcpy(bookshop[0].title, a);
+    // strcpy(bookshop[0].author, a);
+    // bookshop[0].price = 1;
+    // bookshop[0].quantity = 1;
+
+    // bookshop[0].bookID = 1;
+    // strcpy(bookshop[0].title, a);
+    // strcpy(bookshop[0].author, a);
+    // bookshop[0].price = 1;
+    // bookshop[0].quantity = 1;
 }
 void removeBook(int bookNum, int *Num)
 {

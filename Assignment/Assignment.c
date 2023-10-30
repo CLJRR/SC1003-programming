@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
-int MAX = 5;
-Book bookshop[5];
 typedef struct
 {
     int bookID;
@@ -12,17 +10,18 @@ typedef struct
     double price;
     int quantity;
 } Book;
-void listBooks(Book bookshop[]);
-void addBook(Book bookshop[]);
-void removeBook(Book bookshop[]);
-void findBook(Book bookshop[]);
-void updateBook(Book bookshop[]);
-int emptyChecker(Book bookshop[], int current);
-void ascendingOrder(Book bookshop[]);
+int MAX = 5;
+Book bookshop[5];
+void listBooks(int bookNum);
+int addBook(int *bookNum);
+void removeBook(int bookNum, int *Num);
+void findBook(int bookNum);
+void updateBook(int bookNum);
+
 int main()
 {
-    int a[MAX];
     int choice;
+    int bookNum = 0; // num of books
     printf("NTU BOOKSHOP MANAGEMENT PROGRAM:\n1: listBooks()\n2: addBook()\n3: removeBook()\n4: findBook()\n5: updateBook()\n6: quit\n");
     scanf("%d", &choice);
     while (choice != 6)
@@ -30,19 +29,19 @@ int main()
         switch (choice)
         {
         case 1:
-            listBooks(bookshop);
+            listBooks(bookNum);
             break;
         case 2:
-            addBook(bookshop);
+            addBook(&bookNum);
             break;
         case 3:
-            removeBook(bookshop);
+            removeBook(bookNum, &bookNum);
             break;
         case 4:
-            findBook(bookshop);
+            findBook(bookNum);
             break;
         case 5:
-            updateBook(bookshop);
+            updateBook(bookNum);
             break;
         case 6:
             break;
@@ -52,62 +51,93 @@ int main()
         scanf("%d", &choice);
     }
 }
-void ascendingOrder(Book bookshop[])
+void Rearrange(int bookNum)
 {
-}
-int emptyChecker(Book bookshop[], int current)
-{
-    if (bookshop[0].bookID == 0)
+    Book temp;
+    int min, arr;
+    for (int i = 0; i < bookNum; i++)
     {
-        return 0;
-    }
-    else
-    {
-        return 1;
+        min = bookshop[i].bookID;
+        arr = i;
+        for (int j = i + 1; j < bookNum; j++)
+        {
+            if (bookshop[j].bookID < min)
+            {
+                min = bookshop[j].bookID;
+                arr = j;
+            }
+        }
+        temp = bookshop[arr];
+        bookshop[arr] = bookshop[i];
+        bookshop[i] = temp;
     }
 }
-void listBooks(Book bookshop[])
+void listBooks(int bookNum)
 {
     printf("listBooks():\n");
-    for (int i = 0; i < 5; i++)
-    {
-        if (emptyChecker(bookshop, i) == 1)
-        {
-            printf("empty\n");
-            break;
-        }
-        else
-        {
-            printf("BookID: %d\nBook title: %s\nAuthor name: %s\nBook price: %f\nQuantity: %d\n", bookshop[0].bookID, bookshop[0].title, bookshop[0].author, bookshop[0].price = 1, bookshop[0].quantity = 1);
-        }
-    }
+    if (bookNum == 0)
+        printf("The bookshop is empty");
+    else
+        for (int i = 0; i < bookNum; i++)
+            printf("BookID: %d\nBook title: %s\nAuthor name: %s\nBook price: %.2lf\nQuantity: %d\n\n", bookshop[i].bookID, bookshop[i].title, bookshop[i].author, bookshop[i].price, bookshop[i].quantity);
 }
-void addBook(Book bookshop[MAX])
+int bookIdChecker(int bookNum)
+{
+    for (int i = 0; i < bookNum; i++)
+    {
+        if (bookshop[bookNum].bookID == bookshop[i].bookID)
+            return 1;
+    }
+    return 0;
+}
+int addBook(int *bookNum)
 {
     printf("addBook():\n");
-
-    bookshop[0].bookID = 1;
-    char *a = "test";
-    strcpy(bookshop[0].title, a);
-    strcpy(bookshop[0].author, a);
-    // for (int i = 0; i < 5; i++)
-    // {
-    //     bookshop[0].title[i] = a[i];
-    //     bookshop[0].author[i] = a[i];
-    // }
-    bookshop[0].price = 1;
-    bookshop[0].quantity = 1;
-    printf("BookID: %d\nBook title: %s\nAuthor name: %s\nBook price: %.2f\nQuantity: %d\n", bookshop[0].bookID, bookshop[0].title, bookshop[0].author, bookshop[0].price = 1, bookshop[0].quantity = 1);
+    char s[40];
+    printf("Enter bookID:\n");
+    scanf("%d", &bookshop[*bookNum].bookID);
+    printf("Enter book title:\n");
+    scanf("%s", &s);
+    strcpy(bookshop[*bookNum].title, s);
+    printf("Enter author name:\n");
+    scanf("%s", &s);
+    strcpy(bookshop[*bookNum].author, s);
+    printf("Enter price:\n");
+    scanf("%lf", &bookshop[*bookNum].price);
+    printf("Enter quantity:\n");
+    scanf("%d", &bookshop[*bookNum].quantity);
+    if (*bookNum == 5)
+        printf("The bookshop is full! Unable to addBook()\n");
+    else if (bookIdChecker(*bookNum) == 1)
+        printf("The bookID has already existed! Unable to addBook()\n");
+    else
+    {
+        printf("The book has been added successfully\n");
+        *bookNum += 1;
+        printf("%d", *bookNum);
+        Rearrange(*bookNum);
+    }
 }
-void removeBook(Book bookshop[])
+void removeBook(int bookNum, int *Num)
 {
     printf("removeBook():\n");
+    char targetTitle[40], targetAuthor[40];
+    int bookNum;
+    printf("book title: ");
+    scanf("%s", targetTitle);
+    printf("Enter the target author name: ");
+    scanf("%s", targetAuthor);
+    for (int i = 0; i < *Num; i++)
+    {
+        if (strcmp(targetTitle, bookshop[i].title) && strcmp(targetAuthor, bookshop[i].author))
+            bookNum = i;
+    }
 }
-void findBook(Book bookshop[])
+void findBook(int bookNum)
 {
     printf("findBook():\n");
 }
-void updateBook(Book bookshop[MAX])
+void updateBook(int bookNum)
 {
     printf("updateBook():\n");
 }
