@@ -1,55 +1,54 @@
+// #include <stdio.h>
+// #include <math.h>
+
+// double sinc(double x)
+// {
+//     if (x == 0)
+//         return 1;
+//     else
+//         return sin(x) / x;
+// }
+
+// int main(void)
+// {
+//     double lower, upper, x, interval;
+
+//     printf("Enter endpoints a and b (a < b); e.g. -5 5: ");
+//     scanf("%lf %lf", &upper, &lower);
+
+//     printf("x       sinc(x)\n");
+//     interval = (upper - lower) / 20.0;
+//     for (int counter = 0; counter <= 20; counter++)
+//     {
+//         x = lower + counter * interval;
+//         printf("%.2f  %f\n", x, sinc(x));
+//     }
+//     return 0;
+// }
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <strings.h>
-#include <ctype.h>
-typedef struct
-{
-    int bookID;
-    char title[40];
-    char author[40];
-    double price;
-    int quantity;
-} Book;
-int MAX = 5;
-Book bookshop[5];
-int stringcompare(int location, char Ttitle[40], char Tauthor[40])
-{
-    char titleCopy[40], authorCopy[40];
-    strcpy(titleCopy, bookshop[location].title);
-    strcpy(authorCopy, bookshop[location].author);
+#include <math.h>
 
-    for (char *p = titleCopy; *p; p++)
-        *p = toupper(*p);
-    for (char *p = authorCopy; *p; p++)
-        *p = toupper(*p);
-    for (char *p = Ttitle; *p; p++)
-        *p = toupper(*p);
-    for (char *p = Tauthor; *p; p++)
-        *p = toupper(*p);
-    for (int i = 0; i < 5; i++)
-    {
-        if (strcmp(Ttitle, titleCopy) == 0 && strcmp(Tauthor, authorCopy) == 0)
-            return 0;
-    }
-
-    return 1;
+double sinc(double x)
+{
+    if (x == 0)
+        return 1;
+    else
+        return sin(x) / x;
 }
-int main()
+
+int main(void)
 {
-    char a[40] = "test";
-    bookshop[0].bookID = 1;
-    strcpy(bookshop[0].title, a);
-    strcpy(bookshop[0].author, a);
-    bookshop[0].price = 1;
-    bookshop[0].quantity = 1;
-    int location = 0;
-    // bookshop[0].bookID = 1;
-    // strcpy(bookshop[0].title, a);
-    // strcpy(bookshop[0].author, a);
-    // bookshop[0].price = 1;
-    // bookshop[0].quantity = 1;
-    char Ttitle[40] = "test", Tauthor[40] = "test";
-    stringcompare(location, Ttitle, Tauthor);
-    // printf("%d", stringcompare(location, Ttitle, Tauthor));
+    double lower, upper, x, interval;
+
+    printf("Enter endpoints a and b (a < b); e.g. -5 5: ");
+    scanf("%lf %lf", &upper, &lower);
+
+    printf("x       sinc(x)\n");
+    interval = (upper - lower) / 20;
+    for (int counter = 0; counter <= 20; counter++)
+    {
+        x = lower + counter * interval;
+        printf("%f  %f", x, sinc(x));
+    }
+    return 0;
 }
