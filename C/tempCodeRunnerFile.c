@@ -1,1 +1,2 @@
-sinc
+);
+    // scanf("%d",power);

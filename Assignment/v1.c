@@ -13,13 +13,21 @@ typedef struct
 } Book;
 int MAX = 5;
 Book bookshop[5];
-void listBooks(int bookNum);
+// void listBooks(int bookNum);
 int addBook(int *bookNum);
 int removeBook(int *Num);
 void findBook(int bookNum);
 int updateBook(int bookNum);
 int stringcompare(int location, char Ttitle[40], char Tauthor[40]);
-
+void listBooks(int bookNum)
+{
+    printf("listBooks():\n");
+    if (bookNum == 0)
+        printf("The bookshop is empty\n");
+    else
+        for (int i = 0; i < bookNum; i++)
+            printf("BookID: %d\nBook title: %s\nAuthor name: %s\nBook price: %.2lf\nQuantity: %d\n", bookshop[i].bookID, bookshop[i].title, bookshop[i].author, bookshop[i].price, bookshop[i].quantity);
+}
 int main()
 {
     int choice;
@@ -75,15 +83,7 @@ void Rearrange(int bookNum)
         bookshop[i] = temp;
     }
 }
-void listBooks(int bookNum)
-{
-    printf("listBooks():\n");
-    if (bookNum == 0)
-        printf("The bookshop is empty\n");
-    else
-        for (int i = 0; i < bookNum; i++)
-            printf("BookID: %d\nBook title: %s\nAuthor name: %s\nBook price: %.2lf\nQuantity: %d\n", bookshop[i].bookID, bookshop[i].title, bookshop[i].author, bookshop[i].price, bookshop[i].quantity);
-}
+
 int bookIdChecker(int bookNum)
 {
     for (int i = 0; i < bookNum; i++)

@@ -20,7 +20,6 @@ int findBook(int bookNum);
 int updateBook(int bookNum);
 int bookIdChecker(int bookNum);
 void Rearrange(int bookNum);
-int stringcompare(int location, char Ttitle[40], char Tauthor[40]);
 
 int main()
 {
@@ -122,7 +121,7 @@ int removeBook(int *Num)
     }
     for (int i = 0; i < *Num; i++)
     {
-        if (stringcompare(i, Ttitle, Tauthor) == 0)
+        if (strcasecmp(Ttitle, bookshop[i].title) == 0 && strcasecmp(Tauthor, bookshop[i].author) == 0)
         {
             printf("The target book is removed\n");
             printf("BookID: %d\nBook title: %s\nAuthor name: %s\nBook price: %.2lf\nQuantity: %d\n", bookshop[i].bookID, bookshop[i].title, bookshop[i].author, bookshop[i].price, bookshop[i].quantity);
@@ -152,7 +151,7 @@ int findBook(int bookNum)
         Tauthor[strcspn(Tauthor, "\n")] = 0;
     }
     for (int i = 0; i < bookNum; i++)
-        if (stringcompare(i, Ttitle, Tauthor) == 0)
+        if (strcasecmp(Ttitle, bookshop[i].title) == 0 && strcasecmp(Tauthor, bookshop[i].author) == 0)
         {
             printf("The target book is found\n");
             printf("BookID: %d\nBook title: %s\nAuthor name: %s\nBook price: %.2lf\nQuantity: %d\n", bookshop[i].bookID, bookshop[i].title, bookshop[i].author, bookshop[i].price, bookshop[i].quantity);
@@ -178,7 +177,7 @@ int updateBook(int bookNum)
         Tauthor[strcspn(Tauthor, "\n")] = 0;
     }
     for (int i = 0; i < bookNum; i++)
-        if (stringcompare(i, Ttitle, Tauthor) == 0)
+        if (strcasecmp(Ttitle, bookshop[i].title) == 0 && strcasecmp(Tauthor, bookshop[i].author) == 0)
         {
             location = i;
             break;
@@ -226,21 +225,4 @@ void Rearrange(int bookNum)
         bookshop[arr] = bookshop[i];
         bookshop[i] = temp;
     }
-}
-int stringcompare(int location, char Ttitle[40], char Tauthor[40])
-{
-    char titleCopy[40], authorCopy[40];
-    strcpy(titleCopy, bookshop[location].title);
-    strcpy(authorCopy, bookshop[location].author);
-    // for (char *p = titleCopy; *p; p++)
-    //     *p = toupper(*p);
-    // for (char *p = authorCopy; *p; p++)
-    //     *p = toupper(*p);
-    // for (char *p = Ttitle; *p; p++)
-    //     *p = toupper(*p);
-    // for (char *p = Tauthor; *p; p++)
-    //     *p = toupper(*p);
-    if (strcasecmp(Ttitle, titleCopy) == 0 && strcasecmp(Tauthor, authorCopy) == 0)
-        return 0;
-    return 1;
 }
