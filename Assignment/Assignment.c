@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
+#include <ctype.h>
 typedef struct
 {
     int bookID;
@@ -16,7 +17,8 @@ void listBooks(int bookNum);
 int addBook(int *bookNum);
 int removeBook(int *Num);
 void findBook(int bookNum);
-void updateBook(int bookNum);
+int updateBook(int bookNum);
+int stringcompare(int location, char Ttitle[40], char Tauthor[40]);
 
 int main()
 {
@@ -114,6 +116,7 @@ int addBook(int *bookNum)
     scanf("%lf", &bookshop[*bookNum].price);
     printf("Enter quantity:\n");
     scanf("%d", &bookshop[*bookNum].quantity);
+
     if (*bookNum == 5)
         printf("The bookshop is full! Unable to addBook()\n");
     else if (bookIdChecker(*bookNum) == 1)
@@ -128,12 +131,19 @@ int addBook(int *bookNum)
 int removeBook(int *Num)
 {
     printf("removeBook():\n");
-    int count;
-    char targetTitle[40], targetAuthor[40];
-    printf("Enter the targetbook title:\n");
-    scanf("%s", targetTitle);
+    int count = 0;
+    char Ttitle[40], Tauthor[40];
+    printf("Enter the target book title:\n");
+    fgets(Ttitle, 40, stdin);
+    if (fgets(Ttitle, 40, stdin))
+    {
+        Ttitle[strcspn(Ttitle, "\n")] = 0;
+    }
     printf("Enter the target author name:\n");
-    scanf("%s", targetAuthor);
+    if (fgets(Tauthor, 40, stdin))
+    {
+        Tauthor[strcspn(Tauthor, "\n")] = 0;
+    }
     if (*Num == 0)
     {
         printf("The bookshop is empty\n");
@@ -141,27 +151,100 @@ int removeBook(int *Num)
     }
     for (int i = 0; i < *Num; i++)
     {
-        if (strcmp(targetTitle, bookshop[i].title) == 0 && strcmp(targetAuthor, bookshop[i].author) == 0)
+        if (stringcompare(i, Ttitle, Tauthor) == 0)
         {
+            printf("The target book is removed\n");
+            printf("BookID: %d\nBook title: %s\nAuthor name: %s\nBook price: %.2lf\nQuantity: %d\n", bookshop[i].bookID, bookshop[i].title, bookshop[i].author, bookshop[i].price, bookshop[i].quantity);
             for (int j = i; j < *Num; j++)
                 bookshop[j] = bookshop[j + 1];
             *Num -= 1;
-            i--;
             Rearrange(*Num);
             count++;
         }
     }
-    if (count >= 1)
-        printf("The target book is removed\n");
-    else
+    if (count == 0)
         printf("The target book is not in the bookshop\n");
 }
 
 void findBook(int bookNum)
 {
     printf("findBook():\n");
+    char Ttitle[40], Tauthor[40];
+    int count = 0;
+    printf("Enter the target book title:\n");
+    fgets(Ttitle, 40, stdin);
+    if (fgets(Ttitle, 40, stdin))
+    {
+        Ttitle[strcspn(Ttitle, "\n")] = 0;
+    }
+    printf("Enter the target author name:\n");
+    if (fgets(Tauthor, 40, stdin))
+    {
+        Tauthor[strcspn(Tauthor, "\n")] = 0;
+    }
+    for (int i = 0; i < bookNum; i++)
+    {
+        if (stringcompare(i, Ttitle, Tauthor) == 0)
+        {
+            printf("The target book is found\n");
+            printf("BookID: %d\nBook title: %s\nAuthor name: %s\nBook price: %.2lf\nQuantity: %d\n", bookshop[i].bookID, bookshop[i].title, bookshop[i].author, bookshop[i].price, bookshop[i].quantity);
+            count++;
+        }
+    }
+    if (count == 0)
+    {
+        printf("The target book is not found\n");
+    }
 }
-void updateBook(int bookNum)
+int updateBook(int bookNum)
 {
     printf("updateBook():\n");
+    char Ttitle[40], Tauthor[40];
+    int location = 99;
+    printf("Enter the target book title:\n");
+    fgets(Ttitle, 40, stdin);
+    if (fgets(Ttitle, 40, stdin))
+    {
+        Ttitle[strcspn(Ttitle, "\n")] = 0;
+    }
+    printf("Enter the target author name:\n");
+    if (fgets(Tauthor, 40, stdin))
+    {
+        Tauthor[strcspn(Tauthor, "\n")] = 0;
+    }
+    for (int i = 0; i < bookNum; i++)
+        if (stringcompare(i, Ttitle, Tauthor) == 0)
+        {
+            location = i;
+            break;
+        }
+
+    if (location == 99)
+    {
+        printf("The target book is not in the bookshop\n");
+        return 99;
+    }
+    printf("Enter updated book price:\n");
+    scanf("%lf", &bookshop[location].price);
+    printf("Enter updated quantity:\n");
+    scanf("%d", &bookshop[location].quantity);
+    printf("The target book is updated\n");
+    printf("BookID: %d\nBook title: %s\nAuthor name: %s\nBook price: %.2lf\nQuantity: %d\n", bookshop[location].bookID, bookshop[location].title, bookshop[location].author, bookshop[location].price, bookshop[location].quantity);
+}
+int stringcompare(int location, char Ttitle[40], char Tauthor[40])
+{
+    char titleCopy[40], authorCopy[40];
+    strcpy(titleCopy, bookshop[location].title);
+    strcpy(authorCopy, bookshop[location].author);
+    for (char *p = titleCopy; *p; p++)
+        *p = toupper(*p);
+    for (char *p = authorCopy; *p; p++)
+        *p = toupper(*p);
+    for (char *p = Ttitle; *p; p++)
+        *p = toupper(*p);
+    for (char *p = Tauthor; *p; p++)
+        *p = toupper(*p);
+    if (strcmp(Ttitle, titleCopy) == 0 && strcmp(Tauthor, authorCopy) == 0)
+        return 0;
+    return 1;
 }
