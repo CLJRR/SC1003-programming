@@ -17,6 +17,8 @@ int addBook(int *bookNum);
 int removeBook(int *Num);
 int findBook(int bookNum);
 int updateBook(int bookNum);
+int bookIdChecker(int bookNum);
+void Rearrange(int bookNum);
 int stringcompare(int location, char Ttitle[40], char Tauthor[40]);
 
 int main()
@@ -53,27 +55,6 @@ int main()
         scanf("%d", &choice);
     }
 }
-void Rearrange(int bookNum)
-{
-    Book temp;
-    int min, arr;
-    for (int i = 0; i < bookNum; i++)
-    {
-        min = bookshop[i].bookID;
-        arr = i;
-        for (int j = i + 1; j < bookNum; j++)
-        {
-            if (bookshop[j].bookID < min)
-            {
-                min = bookshop[j].bookID;
-                arr = j;
-            }
-        }
-        temp = bookshop[arr];
-        bookshop[arr] = bookshop[i];
-        bookshop[i] = temp;
-    }
-}
 void listBooks(int bookNum)
 {
     printf("listBooks():\n");
@@ -82,15 +63,6 @@ void listBooks(int bookNum)
     else
         for (int i = 0; i < bookNum; i++)
             printf("BookID: %d\nBook title: %s\nAuthor name: %s\nBook price: %.2lf\nQuantity: %d\n", bookshop[i].bookID, bookshop[i].title, bookshop[i].author, bookshop[i].price, bookshop[i].quantity);
-}
-int bookIdChecker(int bookNum)
-{
-    for (int i = 0; i < bookNum; i++)
-    {
-        if (bookshop[bookNum].bookID == bookshop[i].bookID)
-            return 1;
-    }
-    return 0;
 }
 int addBook(int *bookNum)
 {
@@ -163,7 +135,6 @@ int removeBook(int *Num)
     printf("The target book is not in the bookshop\n");
     return 2;
 }
-
 int findBook(int bookNum)
 {
     printf("findBook():\n");
@@ -224,6 +195,36 @@ int updateBook(int bookNum)
     printf("The target book is updated\n");
     printf("BookID: %d\nBook title: %s\nAuthor name: %s\nBook price: %.2lf\nQuantity: %d\n", bookshop[location].bookID, bookshop[location].title, bookshop[location].author, bookshop[location].price, bookshop[location].quantity);
     return 0;
+}
+int bookIdChecker(int bookNum)
+{
+    for (int i = 0; i < bookNum; i++)
+    {
+        if (bookshop[bookNum].bookID == bookshop[i].bookID)
+            return 1;
+    }
+    return 0;
+}
+void Rearrange(int bookNum)
+{
+    Book temp;
+    int min, arr;
+    for (int i = 0; i < bookNum; i++)
+    {
+        min = bookshop[i].bookID;
+        arr = i;
+        for (int j = i + 1; j < bookNum; j++)
+        {
+            if (bookshop[j].bookID < min)
+            {
+                min = bookshop[j].bookID;
+                arr = j;
+            }
+        }
+        temp = bookshop[arr];
+        bookshop[arr] = bookshop[i];
+        bookshop[i] = temp;
+    }
 }
 int stringcompare(int location, char Ttitle[40], char Tauthor[40])
 {
