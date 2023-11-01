@@ -70,21 +70,25 @@ int addBook(int *bookNum)
     int input;
     printf("addBook():\nEnter bookID:\n");
     scanf("%d", &bookshop[*bookNum].bookID);
+
     printf("Enter book title:\n");
-    fgets(s, 40, stdin);
+    getchar();
     if (fgets(s, 40, stdin))
     {
         s[strcspn(s, "\n")] = 0;
     }
     strcpy(bookshop[*bookNum].title, s);
+
     printf("Enter author name:\n");
     if (fgets(s, 40, stdin))
     {
         s[strcspn(s, "\n")] = 0;
     }
     strcpy(bookshop[*bookNum].author, s);
+
     printf("Enter price:\n");
     scanf("%lf", &bookshop[*bookNum].price);
+
     printf("Enter quantity:\n");
     scanf("%d", &bookshop[*bookNum].quantity);
 
