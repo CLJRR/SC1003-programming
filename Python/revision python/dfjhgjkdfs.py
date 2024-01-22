@@ -1,7 +1,16 @@
-# myStr = 'Python Rules'
-myStr = 'hello World'
-print(myStr[-3:-5:-1])
-
-# print(myStr[11])
-# print(myStr[11:0:-2].upper().find("Y"))
-# print(myStr[::-2].upper().find("Y"))
+import random
+jackpot = random.randint(1, 10)
+hit =False
+for i in range(1, 6):
+    guess = int ( input('Enter your guess: ') )
+    if guess > jackpot:
+        print('Your guess is too high!')
+    elif guess < jackpot:
+        print('Your guess is too low!')
+    else: # hit it!
+        hit = True
+        break
+if hit == False:
+    print("You lose. The jackpot is", jackpot)
+else:
+    print('You hit the JACKPOT!') 

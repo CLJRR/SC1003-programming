@@ -230,3 +230,17 @@ void Rearrange(int bookNum)
         bookshop[i] = temp;
     }
 }
+
+for
+    i in range(1, 6)
+    {
+        guess = int(input('Enter your guess: ')) if guess > jackpot{
+                                                                print('Your guess is too high!')} elif guess < jackpot
+        {
+            print('Your guess is too low!')
+        }
+        else:
+        {
+            print('%d', jackpot) break
+        }
+    }
