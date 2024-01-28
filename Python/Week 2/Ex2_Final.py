@@ -70,7 +70,7 @@ def main():
         except ValueError:
             print("Please enter a valid value")
     if gamechoice == 1:                   # Program 1 is the number guessing game
-        guessingGame()
+        guessingGame(gamechoice)
     else:                               # selection 2 is the sum calculation
         calcGame()
 
