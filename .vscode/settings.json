@@ -38,7 +38,10 @@
   "C_Cpp_Runner.compilerArgs": [],
   "C_Cpp_Runner.linkerArgs": [],
   "C_Cpp_Runner.includePaths": [],
-  "C_Cpp_Runner.includeSearch": ["*", "**/*"],
+  "C_Cpp_Runner.includeSearch": [
+    "*",
+    "**/*"
+  ],
   "C_Cpp_Runner.excludeSearch": [
     "**/build",
     "**/build/**",
@@ -57,6 +60,7 @@
     "typeinfo": "c",
     "stdio.h": "c",
     "stdlib.h": "c",
-    "MAIN.C": "cpp"
+    "MAIN.C": "cpp",
+    "tempCodeRunnerFile.C": "cpp"
   }
 }
