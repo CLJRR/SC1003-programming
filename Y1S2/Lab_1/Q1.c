@@ -100,27 +100,42 @@ int insertNode(ListNode **ptrHead, int index, int item)
     return 0;
 }
 
+// int removeNode(ListNode **ptrHead, int index)
+// {
+//     /* Write your program code here */
+//     if (index < 0)
+//         return 1;
+//     ListNode *pre = findNode(*ptrHead, index - 1);
+//     ListNode *temp = pre->next;
+//     ListNode *aft = temp->next;
+//     pre->next = aft;
+//     free(temp);
+//     return 1;
+// }
 int removeNode(ListNode **ptrHead, int index)
 {
     /* Write your program code here */
-    if (index < 0)
+    // case 1: first variable, index 0
+    // case 2: 2nd variable onward
+    ListNode *pre, *temp;
+    if (index == 0)
+    {
+        if (ptrHead != NULL)
+        {
+            temp = *ptrHead;
+            *ptrHead = (*ptrHead)->next;
+            free(temp);
+            return 1;
+        }
+        return 0;
+    }
+    pre = findNode(*ptrHead, index - 1);
+    if (pre != NULL && pre->next != NULL)
+    {
+        temp = pre->next;
+        pre->next = temp->next;
+        free(temp);
         return 1;
-    ListNode *pre = findNode(*ptrHead, index - 1);
-    ListNode *temp = pre->next;
-    ListNode *aft = temp->next;
-    pre->next = aft;
-    free(temp);
-    return 1;
-}
-int removeNode2(ListNode **ptrHead, int index)
-{
-    /* Write your program code here */
-    if (index < 0)
-        return 1;
-    ListNode *pre = findNode(*ptrHead, index - 1);
-    ListNode *temp = pre->next;
-    ListNode *aft = temp->next;
-    pre->next = aft;
-    free(temp);
-    return 1;
+    }
+    return 0;
 }

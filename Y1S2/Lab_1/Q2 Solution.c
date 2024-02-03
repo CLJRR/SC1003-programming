@@ -120,26 +120,35 @@ int insertNode2(LinkedList *ll, int index, int item)
         ll->size++;
         return 1;
     }
+    return 0;
 }
 
 int removeNode2(LinkedList *ll, int index)
 {
-    ListNode *pre, *ptr, *aft;
+    ListNode *cur, *pre;
+
     if (ll->head == NULL)
-        return 0;
+        return -1;
+
     if (index == 0)
     {
-        ptr = ll->head;
-        ll->head = ll->head->next;
-        free(ptr);
-        return 1;
+        cur = ll->head;
+        ll->head = cur->next;
+        free(cur);
+        ll->size--;
+        return 0;
     }
+
     if ((pre = findNode2(*ll, index - 1)) != NULL)
-    {
-        aft = pre->next->next;
-        free(pre->next);
-        pre->next = aft;
-        return 1;
-        /* Write your program code here */
+    { // not the first node
+        if (pre->next == NULL)
+            return -1;
+        cur = pre->next;
+        pre->next = cur->next;
+        free(cur);
+        ll->size--;
+        return 0;
     }
+
+    return -1;
 }
