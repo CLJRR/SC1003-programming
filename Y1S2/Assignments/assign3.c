@@ -82,41 +82,60 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
+// void moveOddItemsToBack(LinkedList *ll)
+// {
+//     if (ll == NULL)
+//         return;
+//     ListNode *pre, *current, *lastnode, *temp;
+//     int size = ll->size;
+//     current = ll->head;
+//     int index = 0;
+//     while (index < size)
+//     {
+//         if ((current->item) % 2 == 1)
+//         {
+//             temp = malloc(sizeof(ListNode));
+//             temp->item = current->item;
+//             temp->next = NULL;
+//             lastnode = findNode(ll, (ll->size) - 1);
+//             lastnode->next = temp;
+//             if (index == 0)
+//             {
+//                 ll->head = current->next;
+//             }
+//             else
+//             {
+//                 pre = findNode(ll, index - 1);
+//                 pre->next = current->next;
+//             }
+//             free(current);
+//             size--;
+//         }
+//         else
+//             index++;
+//         current = findNode(ll, index);
+//     }
+// }
 void moveOddItemsToBack(LinkedList *ll)
 {
-    if (ll == NULL)
-        return;
-    ListNode *pre, *current, *lastnode, *temp;
+    ListNode *cur;
     int size = ll->size;
-    current = ll->head;
+    cur = ll->head;
     int index = 0;
     while (index < size)
     {
-        if ((current->item) % 2 == 1)
+        if ((cur->item) % 2 == 1)
         {
-            temp = malloc(sizeof(ListNode));
-            temp->item = current->item;
-            temp->next = NULL;
-            lastnode = findNode(ll, (ll->size) - 1);
-            lastnode->next = temp;
-            if (index == 0)
-            {
-                ll->head = current->next;
-            }
-            else
-            {
-                pre = findNode(ll, index - 1);
-                pre->next = current->next;
-            }
-            free(current);
+            int value = cur->item;
+            removeNode(ll, index);
+            insertNode(ll, (ll->size), value);
             size--;
         }
         else
             index++;
-        current = findNode(ll, index);
+        cur = cur = findNode(ll, index);
     }
 }
-
 ///////////////////////////////////////////////////////////////////////////////////
 
 void printList(LinkedList *ll)
