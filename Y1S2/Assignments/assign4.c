@@ -85,7 +85,7 @@ int main()
             printf("Back linked list: ");
             printList(&resultBackList);
             printf("\n");
-            removeAllItems(&ll);
+            // removeAllItems(&ll);
             removeAllItems(&resultFrontList);
             removeAllItems(&resultBackList);
             break;
