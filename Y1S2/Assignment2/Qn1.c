@@ -101,6 +101,7 @@ void infixtoPostfix(char *infix, char *postfix)
         }
         infix++;
     }
+
     while (!isEmptyStack(&s))
     {
         *postfix = pop(&s);

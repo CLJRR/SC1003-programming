@@ -66,21 +66,59 @@ int main()
 void infixtoPrefix(char *infix, char *prefix)
 {
     Stack o, r, t;
+    o.ll.head = NULL;
+    r.ll.head = NULL;
+    t.ll.head = NULL;
+    o.ll.size = 0;
+    r.ll.size = 0;
+    t.ll.size = 0;
     while (*infix)
     {
         push(&o, *infix);
         infix++;
-        if (isalnum(peek(&o)))
+    }
+    while (!isEmptyStack(&o))
+    {
+
+        if (peek(&o) == ')')
         {
-            push(&r, pop(&t));
+            push(&t, pop(&o));
         }
-        else if (peek(&o) == ')')
+        else if (isalnum(peek(&o)))
         {
+            push(&r, pop(&o));
         }
+        else if (peek(&o) == '(')
+        {
+            while (peek(&t) != ')')
+                push(&r, pop(&t));
+
+            pop(&t);
+            pop(&o);
+        }
+        else if (isEmptyStack(&t))
+            push(&t, pop(&o));
         else
         {
+            while (precedence(peek(&o)) < precedence(peek(&t)))
+            {
+                push(&r, pop(&t));
+                if (isEmptyStack(&t))
+                    break;
+            }
+            push(&t, pop(&o));
         }
     }
+    while (!isEmptyStack(&t))
+    {
+        push(&r, pop(&t));
+    }
+    while (!isEmptyStack(&r))
+    {
+        *prefix = pop(&r);
+        prefix++;
+    }
+    *prefix = '\0';
 }
 
 int precedence(char op)
@@ -93,8 +131,12 @@ int precedence(char op)
     case '*':
     case '/':
         return 2;
-    default:
+    case ')':
         return 0;
+    case '(':
+        return 4;
+    default:
+        return -1;
     }
 }
 /////////////////////////////////////////////////////////////////////
