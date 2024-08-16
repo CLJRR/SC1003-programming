@@ -1,15 +1,16 @@
 import random
 
 
-def guessingGame():
+def guessingGame():                     # This essentially is the subroutine
+
     print("\nWelcome to the number guessing game!\nYou have 3 tries to guess a number between 1 and 9\nThe system will tell you if your guess is too high or low")
-    # generate a number between 1 and 9 10 not included
-    n = random.randrange(1, 10, 1)
-    tries = int(1)                    # set intial tries number 1
-    # allow 3 tries in program
-    while tries <= 3:
-        # get user input
-        guess = int(0)               # set guess back to 0
+    
+    n = random.randrange(1, 10, 1)      # This generates a number between 1 and 9 10 not included
+    tries = int(0)                      # Set intial tries number 1
+    while tries < 3:                    # allow 3 tries in program (0,1,2)
+        guess = int(0)                  # set guess back to 0
+        
+        # get user input (essentially making sure input is correct)
         while guess <= 0 or guess >= 10:
             try:
                 guess = int(
@@ -70,7 +71,7 @@ def main():
         except ValueError:
             print("Please enter a valid value")
     if gamechoice == 1:                   # Program 1 is the number guessing game
-        guessingGame(gamechoice)
+        guessingGame()
     else:                               # selection 2 is the sum calculation
         calcGame()
 

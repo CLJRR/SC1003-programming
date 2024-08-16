@@ -5,13 +5,11 @@ userDict = {
     'Tom': 'Password1',
 }
 
-
 def usernameChecker(Username, userList):
     if Username in list(userList):
         return 0
     else:
         return 1
-
 
 def passwordchecker(Password):
     upper = lower = digit = int(0)
@@ -28,7 +26,6 @@ def passwordchecker(Password):
             digit = 1
         if upper*lower*digit == 1:
             return 1
-
 
 def UserReg():
 
@@ -51,7 +48,6 @@ def UserReg():
     userDict[Username] = Password
     print(userDict)
 
-
 def UserLogin():
     Username = input("Input your user name:")
     if usernameChecker(Username, userDict) == 1:
@@ -65,7 +61,6 @@ def UserLogin():
         else:
             print("Welcome back, {}, You can start the game.".format(Username))
             return 0
-
 
 def main():
     choice = 0

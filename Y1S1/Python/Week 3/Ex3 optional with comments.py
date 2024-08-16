@@ -102,7 +102,6 @@ def UserLogin():
             return 0
 
 
-# this main() is to tell vscode / idle that this is the main program to run
 def main():
     choice = 0
     while choice <= 0 or choice >= 3:
@@ -117,4 +116,5 @@ def main():
         UserLogin()
 
 
+# this main() is to tell vscode / idle that this is the main program to run
 main()
