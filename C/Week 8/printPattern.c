@@ -1,4 +1,7 @@
 #include <stdio.h>
+
+// This shows 2 ways to do it
+
 // int main()
 // {
 //     int input;

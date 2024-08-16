@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #define MAX 5
 
-typedef struct 
+typedef struct
 {
   int bookID;
   char title[40];
@@ -21,7 +21,7 @@ void updateBook(Book *book, int size);
 // Helper functions
 void sortBooks(Book *book, int size);
 
-int main() 
+int main()
 {
   Book book[MAX];
   int choice, numBooks = 0;
@@ -37,7 +37,7 @@ int main()
   while (choice != 6)
   {
     printf("Enter your choice: \n");
-    scanf( "%d", &choice);
+    scanf("%d", &choice);
 
     switch (choice)
     {
@@ -62,15 +62,19 @@ int main()
   }
 }
 
-void listBooks(Book *book, int size) 
+void listBooks(Book *book, int size)
 {
   printf("listBooks():\n");
-  
-  if (size == 0) {
+
+  if (size == 0)
+  {
     printf("The bookshop is empty\n");
-  } else {
+  }
+  else
+  {
     int i;
-    for (i = 0; i < size; i++) {
+    for (i = 0; i < size; i++)
+    {
       printf("BookID: %d\n", book[i].bookID);
       printf("Book title: %s\n", book[i].title);
       printf("Author name: %s\n", book[i].author);
@@ -80,7 +84,7 @@ void listBooks(Book *book, int size)
   }
 }
 
-int addBook(Book *book, int size) 
+int addBook(Book *book, int size)
 {
   int bookID, quantity, i;
   char title[40], author[40];
@@ -104,14 +108,17 @@ int addBook(Book *book, int size)
   printf("Enter quantity:\n");
   scanf("%d", &quantity);
 
-  for (i = 0; i < size; i++) {
-    if (book[i].bookID == bookID) {
+  for (i = 0; i < size; i++)
+  {
+    if (book[i].bookID == bookID)
+    {
       printf("The bookID has already existed! Unable to addBook()\n");
       return size;
     }
   }
 
-  if (size == MAX) {
+  if (size == MAX)
+  {
     printf("The bookshop is full! Unable to addBook()\n");
     return size;
   }
@@ -133,7 +140,7 @@ int addBook(Book *book, int size)
   return size;
 }
 
-int removeBook(Book *book, int size) 
+int removeBook(Book *book, int size)
 {
   char title[40], author[40];
   int i, j;
@@ -149,14 +156,17 @@ int removeBook(Book *book, int size)
   fgets(author, 40, stdin);
   author[strcspn(author, "\n")] = '\0';
 
-  if (size == 0) {
+  if (size == 0)
+  {
     printf("The bookshop is empty\n");
     return size;
   }
 
-  for (i = 0; i < size; i++) {
+  for (i = 0; i < size; i++)
+  {
     // strcasecmp() -> case insensitive string comparison
-    if (strcasecmp(book[i].title, title) == 0 && strcasecmp(book[i].author, author) == 0) {
+    if (strcasecmp(book[i].title, title) == 0 && strcasecmp(book[i].author, author) == 0)
+    {
       printf("The target book is removed\n");
       printf("BookID: %d\n", book[i].bookID);
       printf("Book title: %s\n", book[i].title);
@@ -164,7 +174,8 @@ int removeBook(Book *book, int size)
       printf("Book price: %.2lf\n", book[i].price);
       printf("Quantity: %d\n", book[i].quantity);
 
-      for (j = i; j < (size - 1); j++) {
+      for (j = i; j < (size - 1); j++)
+      {
         book[j] = book[j + 1];
       }
 
@@ -178,7 +189,7 @@ int removeBook(Book *book, int size)
   return size;
 }
 
-void findBook(Book *book, int size) 
+void findBook(Book *book, int size)
 {
   char title[40], author[40];
   int i;
@@ -194,8 +205,10 @@ void findBook(Book *book, int size)
   fgets(author, 40, stdin);
   author[strcspn(author, "\n")] = '\0';
 
-  for (i = 0; i < size; i++) {
-    if (strcasecmp(book[i].title, title) == 0 && strcasecmp(book[i].author, author) == 0) {
+  for (i = 0; i < size; i++)
+  {
+    if (strcasecmp(book[i].title, title) == 0 && strcasecmp(book[i].author, author) == 0)
+    {
       printf("The target book is found\n");
       printf("BookID: %d\n", book[i].bookID);
       printf("Book title: %s\n", book[i].title);
@@ -212,7 +225,7 @@ void findBook(Book *book, int size)
   return;
 }
 
-void updateBook(Book *book, int size) 
+void updateBook(Book *book, int size)
 {
   char title[40], author[40];
   int i;
@@ -228,8 +241,10 @@ void updateBook(Book *book, int size)
   fgets(author, 40, stdin);
   author[strcspn(author, "\n")] = '\0';
 
-  for (i = 0; i < size; i++) {
-    if (strcasecmp(book[i].title, title) == 0 && strcasecmp(book[i].author, author) == 0) {
+  for (i = 0; i < size; i++)
+  {
+    if (strcasecmp(book[i].title, title) == 0 && strcasecmp(book[i].author, author) == 0)
+    {
       printf("Enter updated book price:\n");
       scanf("%lf", &book[i].price);
       printf("Enter updated quantity:\n");
@@ -261,13 +276,16 @@ If bookA->bookID is less than bookB->bookID, it returns -1. This indicates that 
 If bookA->bookID is greater than bookB->bookID, it returns 1. This indicates that bookA should come after bookB in the sorted order.
 If bookA->bookID is equal to bookB->bookID, it returns 0, signifying that both bookA and bookB have the same bookID, and their order in the sorted array is not significant.
 */
-int compareBookIDs(const void *a, const void *b) {
-    const Book *bookA = (const Book *)a;
-    const Book *bookB = (const Book *)b;
+int compareBookIDs(const void *a, const void *b)
+{
+  const Book *bookA = (const Book *)a;
+  const Book *bookB = (const Book *)b;
 
-    if (bookA->bookID < bookB->bookID) return -1;
-    if (bookA->bookID > bookB->bookID) return 1;
-    return 0;
+  if (bookA->bookID < bookB->bookID)
+    return -1;
+  if (bookA->bookID > bookB->bookID)
+    return 1;
+  return 0;
 }
 
 void sortBooks(Book *book, int size)
